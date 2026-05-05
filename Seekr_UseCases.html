@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Use Case Brief — Seekr</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d1117;
+    color: #e6e8ec;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  /* ── Header ─────────────────────────────────────── */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #1e2530;
+  }
+
+  .logo-area h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: #f0f2f5;
+    margin-bottom: 4px;
+  }
+
+  .logo-area .sub {
+    font-size: 13px;
+    color: #6b7280;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .meta-badge {
+    text-align: right;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.8;
+  }
+
+  .meta-badge .tag {
+    display: inline-block;
+    background: #1a2235;
+    color: #7da4d0;
+    border: 1px solid #243045;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* ── Intro ─────────────────────────────────────── */
+  .intro {
+    margin-bottom: 56px;
+  }
+
+  .intro p {
+    font-size: 15px;
+    color: #9aa3b0;
+    max-width: 640px;
+    line-height: 1.75;
+  }
+
+  .intro strong {
+    color: #d4dae4;
+    font-weight: 500;
+  }
+
+  /* ── Section label ─────────────────────────────── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .uc-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .uc-number.blue { background: #0e2a47; color: #5ca0d3; border: 1px solid #1a3e62; }
+  .uc-number.teal { background: #062820; color: #2ec490; border: 1px solid #0f4535; }
+
+  .uc-title {
+    font-size: 19px;
+    font-weight: 500;
+    color: #e8ecf0;
+    letter-spacing: -0.2px;
+  }
+
+  .uc-domain {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  /* ── Use Case Card ─────────────────────────────── */
+  .uc-card {
+    background: #111827;
+    border: 1px solid #1e2a3a;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .uc-card .card-inner {
+    padding: 32px 36px 28px;
+  }
+
+  /* ── Three-column blocks ───────────────────────── */
+  .blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: #1e2a3a;
+    margin: 28px 0 0;
+    border-top: 1px solid #1e2a3a;
+  }
+
+  .block {
+    background: #0d1420;
+    padding: 22px 24px;
+  }
+
+  .block-label {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .block ul li {
+    font-size: 13.5px;
+    color: #9aa3b0;
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .block ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #2e3d50;
+  }
+
+  .block.highlight ul li::before { background: #5ca0d3; }
+  .block.highlight-teal ul li::before { background: #2ec490; }
+
+  .block.highlight ul li { color: #c5d4e8; }
+  .block.highlight-teal ul li { color: #b8e8d6; }
+
+  /* ── Context strip ─────────────────────────────── */
+  .context-strip {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .chip {
+    font-size: 11.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    font-weight: 500;
+  }
+
+  .chip.blue { background: #0a1e33; color: #6ba8d5; border-color: #1a3d5c; }
+  .chip.teal { background: #041a14; color: #34c99a; border-color: #0d4030; }
+  .chip.gray { background: #141920; color: #6b7280; border-color: #222a35; }
+
+  /* ── Narrative ─────────────────────────────────── */
+  .narrative {
+    font-size: 14.5px;
+    color: #8a939e;
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+
+  .narrative strong { color: #c0cad8; font-weight: 500; }
+
+  /* ── Outcome banner ────────────────────────────── */
+  .outcome-banner {
+    margin: 0;
+    padding: 18px 24px;
+    border-top: 1px solid #1e2a3a;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .outcome-banner.blue { background: #091624; }
+  .outcome-banner.teal { background: #05150f; }
+
+  .outcome-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-top: 1px;
+  }
+
+  .outcome-icon.blue { background: #0e2a47; color: #5ca0d3; }
+  .outcome-icon.teal { background: #062820; color: #2ec490; }
+
+  .outcome-text {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.6;
+  }
+
+  .outcome-text strong { color: #9aa3b0; font-weight: 500; }
+
+  /* ── Divider ───────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: #1e2530;
+    margin: 56px 0;
+  }
+
+  /* ── Ask box ───────────────────────────────────── */
+  .ask-box {
+    background: #111827;
+    border: 1px solid #1e2a3a;
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+
+  .ask-box h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #d4dae4;
+    margin-bottom: 12px;
+  }
+
+  .ask-box p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .ask-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ask-item {
+    background: #0d1420;
+    border: 1px solid #1e2a3a;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #8a939e;
+    line-height: 1.55;
+  }
+
+  .ask-item span {
+    display: block;
+    font-size: 11px;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  /* ── Footer ─────────────────────────────────────── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #1e2530;
+    font-size: 12px;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 56px; }
+    .blocks { grid-template-columns: 1fr; }
+    .ask-grid { grid-template-columns: 1fr; }
+    .header { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <h1>Use Case Brief</h1>
+      <div class="sub">Prepared for Seekr — Solution Discovery</div>
+    </div>
+    <div class="meta-badge">
+      <div class="tag">Confidential</div><br/>
+      May 2026<br/>
+      InSolare Energy Limited
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <p>We operate two distinct technology platforms — one for <strong>electrolyzer R&amp;D</strong> and one for <strong>solar plant O&amp;M</strong> — and are seeking AI-powered solutions that can enhance intelligence, reduce manual effort, and surface actionable insights from the data these platforms generate. The use cases below describe our current context and where we believe AI can create the most immediate value.</p>
+  </div>
+
+  <!-- ── USE CASE 1 ── -->
+  <div class="section-label">
+    <div class="uc-number blue">01</div>
+    <div>
+      <div class="uc-title">R&amp;D Experiment Intelligence for Electrolyzer Development</div>
+      <div class="uc-domain">Electrolyzer Test Platform (ETP) · InSolare Energy Limited</div>
+    </div>
+  </div>
+
+  <div class="uc-card">
+    <div class="card-inner">
+      <div class="context-strip">
+        <span class="chip blue">Web App (ETP)</span>
+        <span class="chip gray">16-parameter cell design</span>
+        <span class="chip gray">Session-based test data</span>
+        <span class="chip gray">CSV / XLSX ingestion</span>
+        <span class="chip gray">Stack monitoring</span>
+      </div>
+      <p class="narrative">
+        Our Electrolyzer Test Platform manages the full R&amp;D lifecycle — from registering individual cells (defined by <strong>16 material parameters</strong> across membrane, catalyst, bipolar plate, and gasket specifications) through to uploading multi-session test data and viewing live KPIs. Each test session produces performance readings including <strong>stack efficiency, specific energy consumption (SEC), H₂ purity, and cell voltage</strong>.
+      </p>
+      <br/>
+      <p class="narrative">
+        Currently, researchers compare cell configurations manually through a tabular "Compare Setups" view and interpret charts session-by-session. With dozens of possible material combinations and multiple test sessions per cell design, <strong>identifying which configurations consistently deliver superior performance is slow and insight-dependent on the researcher's own intuition</strong>.
+      </p>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="block-label">Current Challenges</div>
+        <ul>
+          <li>Manual cross-session comparison of 16-parameter cells</li>
+          <li>No automated correlation between materials and outcomes</li>
+          <li>AI insights panel exists but lacks deep reasoning</li>
+          <li>Hard to identify best-performing configurations at a glance</li>
+        </ul>
+      </div>
+      <div class="block highlight">
+        <div class="block-label">AI Opportunity</div>
+        <ul>
+          <li>Natural language querying across experiment sessions</li>
+          <li>Correlate material parameters to SEC, efficiency, purity</li>
+          <li>Auto-rank cell designs by KPI performance</li>
+          <li>Highlight anomalous sessions vs. statistical baseline</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="block-label">Example Questions to Answer</div>
+        <ul>
+          <li>"Which catalyst achieved lowest SEC across IrO₂ vs IrRuOx tests?"</li>
+          <li>"Rank all cells by H₂ purity deviation from baseline"</li>
+          <li>"What membrane thickness correlates with best efficiency?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="outcome-banner blue">
+      <div class="outcome-icon blue">→</div>
+      <div class="outcome-text">
+        <strong>Expected outcome:</strong> Researchers can query experiment history in natural language, auto-discover high-performing material combinations, and reduce time-to-insight from hours of manual comparison to seconds — accelerating the electrolyzer R&amp;D cycle.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── USE CASE 2 ── -->
+  <div class="section-label">
+    <div class="uc-number teal">02</div>
+    <div>
+      <div class="uc-title">Proactive Fault &amp; Performance Intelligence for Solar O&amp;M</div>
+      <div class="uc-domain">App-Based Central Monitoring System (ACMS) · InSolare Energy</div>
+    </div>
+  </div>
+
+  <div class="uc-card">
+    <div class="card-inner">
+      <div class="context-strip">
+        <span class="chip teal">Mobile App + Dashboard</span>
+        <span class="chip gray">Multi-site solar fleet</span>
+        <span class="chip gray">Daily generation logs</span>
+        <span class="chip gray">PM checklists</span>
+        <span class="chip gray">Fault reporting</span>
+      </div>
+      <p class="narrative">
+        InSolare operates a portfolio of solar power plants and is transitioning from fragmented Excel-based O&amp;M reporting to a centralized ACMS platform. The system captures <strong>daily generation data, inverter-wise performance, PR (Performance Ratio), CUF, preventive maintenance checklists, and fault events</strong> — all structured and role-governed.
+      </p>
+      <br/>
+      <p class="narrative">
+        Despite structured data capture, the platform today is <strong>largely reactive</strong>: faults are logged after they occur, escalation runs through WhatsApp and email, and cross-site pattern analysis is absent. The Phase 3 roadmap explicitly calls for AI — predictive maintenance, anomaly detection, and fleet benchmarking — but there is <strong>no AI intelligence layer defined yet</strong>. Seekr has an opportunity to define and own this layer.
+      </p>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="block-label">Current Challenges</div>
+        <ul>
+          <li>Reactive fault detection — no alerts until generation drops</li>
+          <li>Manual escalation via WhatsApp / email</li>
+          <li>No cross-site pattern analysis for recurring failures</li>
+          <li>PR deviation and inverter trips go undiagnosed</li>
+          <li>Preventive maintenance compliance tracked manually</li>
+        </ul>
+      </div>
+      <div class="block highlight-teal">
+        <div class="block-label">AI Opportunity</div>
+        <ul>
+          <li>Anomaly detection on PR deviation and generation shortfall</li>
+          <li>Intelligent fault pattern recognition across fleet</li>
+          <li>Predictive signals for inverter failures and PM overdue risk</li>
+          <li>Natural language querying of O&amp;M and generation data</li>
+          <li>Auto-prioritized alert triage for monitoring teams</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="block-label">Example Queries to Enable</div>
+        <ul>
+          <li>"Which sites have PR below target for 3+ consecutive days?"</li>
+          <li>"List inverters with repeated trips in the last 30 days"</li>
+          <li>"Show sites with overdue quarterly PM tasks this month"</li>
+          <li>"What's the generation loss attribution by fault type?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="outcome-banner teal">
+      <div class="outcome-icon teal">→</div>
+      <div class="outcome-text">
+        <strong>Expected outcome:</strong> The O&amp;M team shifts from reactive incident logging to proactive intelligence — reducing fault response time, improving plant availability and PR, and giving management a fleet-wide AI layer that continuously monitors performance against targets.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Ask box -->
+  <div class="ask-box">
+    <h2>What we're looking for from Seekr</h2>
+    <p>We'd like to understand how Seekr's technology can address one or both of these use cases. Specifically, we're interested in the following areas:</p>
+    <div class="ask-grid">
+      <div class="ask-item">
+        <span>Data Intelligence</span>
+        How can Seekr ingest structured tabular data from our platforms and make it queryable in natural language?
+      </div>
+      <div class="ask-item">
+        <span>Anomaly &amp; Pattern Detection</span>
+        What AI models or frameworks does Seekr offer for detecting performance deviations and recurring failure patterns?
+      </div>
+      <div class="ask-item">
+        <span>Integration Approach</span>
+        How does Seekr integrate with existing web apps, mobile apps, or data pipelines — including potential Microsoft Fabric compatibility for Phase 3?
+      </div>
+      <div class="ask-item">
+        <span>Deployment &amp; Roadmap</span>
+        What does a phased rollout look like — can we start with one platform and expand to the other?
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>InSolare Energy Limited</span>
+    <span>Internal — Not for distribution</span>
+  </div>
+
+</div>
+</body>
+</html>
