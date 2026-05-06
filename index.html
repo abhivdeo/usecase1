@@ -229,6 +229,76 @@
     margin-bottom: 10px;
   }
 
+  /* ── Questions section ── */
+  .q-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .q-group {
+    background: #0d1420;
+    border: 1px solid #1e2a3a;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .q-group-head {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e2a3a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .q-group-head .q-icon { font-size: 13px; }
+
+  .q-group-head .q-cat {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: 600;
+  }
+
+  .q-group-head.tech   { background: #091624; }
+  .q-group-head.tech   .q-cat { color: #3d7aad; }
+  .q-group-head.data   { background: #091a12; }
+  .q-group-head.data   .q-cat { color: #2e9e62; }
+  .q-group-head.deploy { background: #160f1e; }
+  .q-group-head.deploy .q-cat { color: #8b7cf8; }
+  .q-group-head.roadmap { background: #1a1000; }
+  .q-group-head.roadmap .q-cat { color: #d97706; }
+  .q-group-head.cost   { background: #1a0d0d; }
+  .q-group-head.cost   .q-cat { color: #e05252; }
+  .q-group-head.trust  { background: #0d1520; }
+  .q-group-head.trust  .q-cat { color: #5ca0d3; }
+
+  .q-list {
+    padding: 10px 14px 12px;
+    list-style: none;
+  }
+
+  .q-list li {
+    font-size: 12px;
+    color: #6b7a8d;
+    padding: 5px 0 5px 14px;
+    position: relative;
+    border-bottom: 1px solid #141c28;
+    line-height: 1.45;
+  }
+
+  .q-list li:last-child { border-bottom: none; }
+
+  .q-list li::before {
+    content: '?';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #2d3d52;
+  }
+
   .footer {
     margin-top: 28px;
     padding-top: 18px;
@@ -409,6 +479,84 @@
       <div class="b-title">Secure Deployment</div>
       <div class="b-desc">On-prem or cloud with data lineage control — no external LLM dependency</div>
     </div>
+  </div>
+
+  <!-- Questions to ask Seekr -->
+  <div class="section-label" style="margin-top:28px;">Questions to ask the Seekr team</div>
+  <div class="q-grid">
+
+    <div class="q-group">
+      <div class="q-group-head tech">
+        <span class="q-icon">⚙️</span>
+        <span class="q-cat">Platform &amp; Technology</span>
+      </div>
+      <ul class="q-list">
+        <li>Does SeekrFlow support ingestion of time-series operational data (inverter logs, generation readings) natively, or does it require custom connectors?</li>
+        <li>Can agents be fine-tuned on tabular structured data (Excel/CSV exports from ACMS and ETP), or is fine-tuning limited to text or document formats?</li>
+        <li>How does SeekrFlow handle multi-site data separation — can a single deployment serve multiple plant sites with site-level access control?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-head data">
+        <span class="q-icon">📊</span>
+        <span class="q-cat">Anomaly Detection &amp; Intelligence</span>
+      </div>
+      <ul class="q-list">
+        <li>What anomaly detection models does Seekr offer out of the box? Can thresholds be customised per site or inverter type?</li>
+        <li>Can the platform correlate multiple parameters simultaneously — e.g., linking PR deviation, irradiance, and inverter trips to a probable root cause?</li>
+        <li>How does the system handle sparse or missing data, common in solar O&amp;M logs during grid outages or communication failures?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-head deploy">
+        <span class="q-icon">🚀</span>
+        <span class="q-cat">Integration &amp; Deployment</span>
+      </div>
+      <ul class="q-list">
+        <li>Is there a REST API or webhook layer to push AI-generated alerts into our existing ACMS mobile app without requiring a full platform rebuild?</li>
+        <li>Does SeekrFlow support Microsoft Fabric or Power BI as a downstream output layer for dashboards and reports?</li>
+        <li>What does a typical integration timeline look like for a two-platform deployment — ACMS first, ETP second?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-head roadmap">
+        <span class="q-icon">🗺️</span>
+        <span class="q-cat">Roadmap &amp; Scalability</span>
+      </div>
+      <ul class="q-list">
+        <li>Can the platform start with rule-based anomaly detection and progressively shift to ML-based prediction as more historical data accumulates?</li>
+        <li>What is Seekr's roadmap for energy and utilities verticals — are there solar or industrial IoT-specific models in development?</li>
+        <li>How does pricing scale as InSolare's plant portfolio grows — per site, per user, or per data volume?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-head cost">
+        <span class="q-icon">💰</span>
+        <span class="q-cat">Commercials &amp; Support</span>
+      </div>
+      <ul class="q-list">
+        <li>What is the typical commercial structure — SaaS subscription, usage-based, or a one-time implementation fee plus ongoing support?</li>
+        <li>Is there a pilot or PoC programme available, and what would a 90-day proof of concept on ACMS data look like?</li>
+        <li>What level of ongoing support and model retraining is included — or is that a separate managed services engagement?</li>
+      </ul>
+    </div>
+
+    <div class="q-group">
+      <div class="q-group-head trust">
+        <span class="q-icon">🔐</span>
+        <span class="q-cat">Data Security &amp; Governance</span>
+      </div>
+      <ul class="q-list">
+        <li>Can SeekrFlow be deployed entirely within InSolare's cloud environment (e.g., Azure India region) so plant data never leaves our boundary?</li>
+        <li>How are model outputs made explainable and auditable — particularly for fault attribution that may have contractual implications with clients?</li>
+        <li>What certifications does SeekrFlow carry — ISO 27001, SOC 2, or equivalent?</li>
+      </ul>
+    </div>
+
   </div>
 
   <div class="footer">
